@@ -1,7 +1,28 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from .models import Todo
+from .forms import TodoForm
+from django.contrib import messages
 
 
 def index(request):
-    return render(request, 'index.html')
+    # user = request.user
+    todo = Todo.objects.all().order_by('-date_added')
+    if request.method =='POST':
+        form = TodoForm(request.POST)
+        if form.is_valid():
+            todo = form.save(commit=False)
+            # todo.user = user
+            todo.description = 'this is the default description'
+            print(todo)
+            todo.save()
+            messages.success(request, 'Todo successfully added')
+            return redirect('core:index')
+    else:
+        form = TodoForm()
+    
+    context = {
+        'todo': todo,
+        'form': form}
+    return render(request, 'index.html', context)
 
 # Create your views here.
