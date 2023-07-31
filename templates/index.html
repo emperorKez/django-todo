@@ -46,14 +46,6 @@
                     <div class="col-1">
                       <button type="submit" class="btn btn-primary">Add</button>
                     </div>
-                      
-                    <!-- <input type="text" class="form-control form-control-lg" id="exampleFormControlInput1"
-                      placeholder="Add new..."> -->
-                    <!-- <a href="#!" data-mdb-toggle="tooltip" title="Set due date"><i
-                        class="fas fa-calendar-alt fa-lg me-3"></i></a>
-                    <div>
-                      <button type="submit" class="btn btn-primary">Add</button>
-                    </div> -->
                     
                   </div>
                 </form>
@@ -64,16 +56,8 @@
             <hr class="my-4">
 
             <div class="d-flex justify-content-end align-items-center mb-4 pt-2 pb-3">
-              <p class="small mb-0 me-2 text-muted">Filter</p>
-              <select class="select">
-                <option value="1">All</option>
-                <option value="2">Completed</option>
-                <option value="3">Active</option>
-                <option value="4">Has due date</option>
-              </select>
               <p class="small mb-0 ms-4 me-2 text-muted">Sort</p>
               <select class="select">
-                <option value="1">Added date</option>
                 <option value="2">Due date</option>
               </select>
               <a href="#!" style="color: #23af89;" data-mdb-toggle="tooltip" title="Ascending"><i
@@ -83,32 +67,8 @@
             <!-- list of todo start -->
             
             
-            {% for item in todo %}
-              
-            
-              
+            {% for item in todo %}    
             <ul class="list-group list-group-horizontal rounded-0 bg-transparent">
-              
-              {% if item.completed == True %}
-              <li
-                class="list-group-item d-flex align-items-center ps-0 pe-3 py-1 rounded-0 border-0 bg-transparent">
-                <div class="form-check">
-                  <input class="form-check-input me-0" type="checkbox" value="" id="flexCheckChecked1"
-                    aria-label="..." checked />
-                </div>
-              </li>
-              {% else %}
-              <li
-                class="list-group-item d-flex align-items-center ps-0 pe-3 py-1 rounded-0 border-0 bg-transparent">
-                <div class="form-check">
-                  <input class="form-check-input me-0" type="checkbox" value="" id="flexCheckChecked2"
-                    aria-label="..." checked />
-                </div>
-              </li>
-                
-              {% endif %}
-                
-              
               <li
                 class="list-group-item px-3 py-1 d-flex align-items-center flex-grow-1 border-0 bg-transparent">
                 <p class="lead fw-normal mb-0">
@@ -117,9 +77,7 @@
               </li>
               <li class="list-group-item ps-3 pe-0 py-1 rounded-0 border-0 bg-transparent">
                 <div class="d-flex flex-row justify-content-end mb-1">
-                  <a href="#!" class="text-info" data-mdb-toggle="tooltip" title="Edit todo"><i
-                      class="fas fa-pencil-alt me-3"></i></a>
-                  <a href="#!" class="text-danger" data-mdb-toggle="tooltip" title="Delete todo"><i
+                  <a href="{% url 'core:delete-todo' item.id %}" class="text-danger" data-mdb-toggle="tooltip" title="Delete todo"><i
                       class="fas fa-trash-alt"></i></a>
                 </div>
                 <div class="text-end text-muted">

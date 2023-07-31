@@ -6,7 +6,7 @@ from django.contrib import messages
 
 def index(request):
     # user = request.user
-    todo = Todo.objects.all().order_by('-date_added')
+    todo = Todo.objects.all().order_by('due_date')
     if request.method =='POST':
         form = TodoForm(request.POST)
         if form.is_valid():
@@ -25,4 +25,7 @@ def index(request):
         'form': form}
     return render(request, 'index.html', context)
 
-# Create your views here.
+def delete_todo(request, todo_id):
+    todo = Todo.objects.get(id=todo_id).delete()
+    return redirect('core:index')
+
